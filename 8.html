@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine 💖</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI',sans-serif;
+    text-align:center;
+    color:white;
+    background:linear-gradient(135deg,#ff9a9e,#fecfef);
+    overflow-x:hidden;
+}
+
+/* Pages */
+.page{
+    display:none;
+    min-height:100vh;
+    padding:60px 20px 40px;
+}
+
+.active{
+    display:block;
+}
+
+/* Heading Responsive */
+h1{
+    font-size:clamp(22px,5vw,36px);
+}
+
+/* Buttons */
+button{
+    padding:12px 30px;
+    font-size:16px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    background:white;
+    color:#ff4d6d;
+    margin-top:25px;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff4d6d;
+    color:white;
+}
+
+/* Typewriter */
+.typewriter{
+    font-size:clamp(18px,4vw,28px);
+    min-height:60px;
+    margin-top:20px;
+}
+
+/* Image Row */
+.image-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+
+/* Images */
+.center-img,
+.shayari-img{
+    width:100%;
+    max-width:300px;
+    height:auto;
+    object-fit:contain;
+    background:white;
+    border-radius:20px;
+    padding:5px;
+    box-shadow:0 0 20px rgba(255,255,255,0.8);
+    transition:0.4s ease;
+}
+
+.center-img:hover,
+.shayari-img:hover{
+    transform:scale(1.05);
+}
+
+/* Final Message Responsive */
+#page4 p{
+    font-size:clamp(16px,4vw,24px);
+    width:100%;
+    max-width:700px;
+    margin:auto;
+}
+
+/* Heart Animation */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation:float 6s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);opacity:1;}
+    100%{transform:translateY(-110vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+    
+    <div class="typewriter" id="typeText"></div>
+    <button onclick="nextPage(2)">OK 💕</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+    <h1>💞 For My Raja Ji 💞</h1>
+
+    <div class="image-row">
+        <img src="raj.jpeg" class="center-img">
+        <img src="shyari.jpeg" class="shayari-img">
+    </div>
+
+    <button onclick="nextPage(3)">Next ❤️</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+    <h1>💖 Our Beautiful Memories 💖</h1>
+
+    <div class="image-row">
+        <img src="3-1.jpeg" class="center-img">
+        <img src="c1.jpeg" class="center-img">
+        <img src="3-2.jpeg" class="center-img">
+    </div>
+
+    <button onclick="nextPage(4)">Next 💕</button>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4" class="page">
+    <h1>💌 My Heart Message 💌</h1>
+
+    <p>
+        "You are the piece of my heart I never knew was missing." 💖<br><br>
+        "True love is when two hearts choose each other every single day, again and again." 💞<br><br>
+        I love you so much ❤️  
+        Happy Valentine’s Day 😘🥰
+    </p>
+</div>
+
+<!-- Music -->
+<audio id="bgMusic" loop>
+    <source src="voice.mp4" type="audio/mpeg">
+</audio>
+
+<script>
+document.body.addEventListener("click", function(){
+    document.getElementById("bgMusic").play();
+});
+
+/* Typewriter */
+const message="💌 Listening the song and feel my felling... 💖";
+let i=0;
+function typeWriter(){
+    if(i<message.length){
+        document.getElementById("typeText").innerHTML+=message.charAt(i);
+        i++;
+        setTimeout(typeWriter,60);
+    }
+}
+typeWriter();
+
+/* Page Switch */
+function nextPage(num){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById("page"+num).classList.add("active");
+}
+
+/* Hearts */
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=Math.random()*20+18+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+},600);
+</script>
+
+</body>
+</html>
